@@ -1,11 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import images from '../assets/images'
+import Card from './Card'
 
 const Container=styled.div`
 height:calc(100vh - 64px);
 overflow-y:auto;
 display:grid;
 grid-template-columns:repeat(3, 1fr);
+gap:12px;
 padding:48px 64px;
 
 @media(max-width:480px){
@@ -21,10 +24,14 @@ grid-template-columns:repeat(2,1fr);
 `
 
 
-const CardList = ({content}) => {
+const CardList = () => {
   return (
     <div>
-      <Container>{content}</Container>
+      <Container>
+        {images.map((img,idx)=>{
+            return<Card key={idx} img={img.src}/>
+        })}
+      </Container>
     </div>
   )
 }

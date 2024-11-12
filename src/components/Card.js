@@ -15,7 +15,9 @@ width:100%;
 object-fit:cover;
 border-radius:inherit;
 `
-const Card = ({img}) => {
+const Card = ({img
+    
+}) => {
   return (
     <div>
         <Container>
