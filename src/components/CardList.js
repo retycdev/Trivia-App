@@ -2,13 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import images from '../assets/images'
 import Card from './Card'
+import AppBar from './App_bar'
+import { Link } from 'react-router-dom'
 
 const Container=styled.div`
 height:calc(100vh - 64px);
 overflow-y:auto;
 display:grid;
 grid-template-columns:repeat(3, 1fr);
-gap:12px;
+gap:32px;
 padding:48px 64px;
 
 @media(max-width:480px){
@@ -24,12 +26,15 @@ grid-template-columns:repeat(2,1fr);
 `
 
 
-const CardList = () => {
+const CardList = ({categories}) => {
   return (
     <div>
+      <AppBar/>
       <Container>
-        {images.map((img,idx)=>{
-            return<Card key={idx} img={img.src}/>
+        {categories.map((category,idx)=>{
+            return<Link  key={idx} to={`/Trivia-App/playroom/${category.name}`} style={{textDecoration:"none",color:"black"}}>
+              <Card text={category.name} img={category.image}/>
+            </Link>
         })}
       </Container>
     </div>

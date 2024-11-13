@@ -10,6 +10,8 @@ border-radius:8px;
 cursor:pointer;
 @media(max-width:768px){
 height:196px;}
+
+
 `
 const Image=styled.img`
 height:100%;
@@ -17,13 +19,14 @@ width:100%;
 object-fit:cover;
 border-radius:inherit;
 `
-const Card = ({img
+const Card = ({img,text
 
 }) => {
   return (
     <div>
         <Container>
             <Image src={img}/>
+            <p>{text}</p>
         </Container>
       
     </div>
