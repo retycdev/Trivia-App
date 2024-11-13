@@ -19,7 +19,7 @@ width:100%;
 object-fit:cover;
 border-radius:inherit;
 `
-const Card = ({img,text
+const CategoriesCard = ({img,text
 
 }) => {
   return (
@@ -33,4 +33,4 @@ const Card = ({img,text
   )
 }
 
-export default Card
+export default CategoriesCard

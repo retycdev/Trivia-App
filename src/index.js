@@ -2,5 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
+import FetchData from "./context/FetchData";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render( <FetchData children={<App />}/> , document.getElementById("root"));
