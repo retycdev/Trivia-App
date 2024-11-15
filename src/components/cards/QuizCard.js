@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import sounds from "../../assets/sounds/sounds";
+import { ScoreContext } from "../../context/Score";
 
 const Container = styled.div`
   height: 100%;
@@ -35,7 +36,7 @@ const AnswerList = styled.div`
 `;
 
 const SelectAnswer = styled.div`
-  height: 64px;
+ min-height: 64px;
   color: white;
   background-color: #563a9c;
   cursor: pointer;
@@ -51,23 +52,31 @@ const SelectAnswer = styled.div`
   }
 `;
 
-const QuizCard = ({ quiz, ans, correct }) => {
+const QuizCard = ({ quiz, ans, correct, onAnswerSelected }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const successAudio = new Audio(sounds.success);
-  successAudio.volume=0.08;
-  const failAudio=new Audio(sounds.wrong)
-  failAudio.volume=0.04;
+  successAudio.volume = 0.08;
+  const failAudio = new Audio(sounds.wrong);
+  failAudio.volume = 0.04;
 
+   //To update score
+   const{setScore}=useContext(ScoreContext)
   const handleAnswerClick = (answer) => {
-    if (selectedAnswer) return; // prevent multiple clicks
+    if (selectedAnswer) return; // Prevent multiple clicks
     setSelectedAnswer(answer);
 
     if (answer === correct) {
       successAudio.play();
-    }
-    else{
+      setScore((prev)=>prev+=500);
+    } else {
       failAudio.play();
     }
+
+    // Reset selected answer after a short delay
+    setTimeout(() => {
+      setSelectedAnswer(null); // Reset for next question
+      onAnswerSelected(); // Move to next question
+    }, 1000); // Delay before moving to the next question
   };
 
   return (
@@ -79,7 +88,12 @@ const QuizCard = ({ quiz, ans, correct }) => {
             key={idx}
             onClick={() => handleAnswerClick(a)}
             style={{
-              backgroundColor: selectedAnswer === a ? (a === correct ? "green" : "red") : "",
+              backgroundColor:
+                selectedAnswer === a
+                  ? a === correct
+                    ? "green"
+                    : "red"
+                  : "",
             }}
           >
             {a}

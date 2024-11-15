@@ -10,7 +10,8 @@ const Container = styled.div`
   overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  column-gap: 16px;
+  row-gap:56px;
   padding: 48px 64px;
 
   @media(max-width: 480px) {
@@ -35,9 +36,9 @@ const CardList = () => {
           <Link
             key={idx}
             to={`/Trivia-App/playroom/${category.id}`}
-            style={{ textDecoration: 'none', color: 'black' }}
+            style={{ textDecoration: 'none', color: '#4B4376',  fontSize:'22px', fontWeight:'bold'}}
           >
-            <CategoriesCard text={category.name} />
+            <CategoriesCard text={category.name} img={category.image}/>
           </Link>
         ))}
       </Container>

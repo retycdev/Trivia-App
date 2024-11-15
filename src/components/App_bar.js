@@ -12,10 +12,13 @@ font-size:24px;
 
 `
 
-const AppBar = () => {
+const AppBar = ({playroom}) => {
   return (
     <div>
-        <Container><p>QuizWhiz.</p></Container>
+        <Container>
+          {playroom? <p>{playroom}</p> :<p>QuizWhiz.</p> }
+          
+          </Container>
     
     </div>
   )

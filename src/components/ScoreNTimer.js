@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { ScoreContext } from '../context/Score';
+import { useNavigate} from 'react-router';
+
 
 const Container = styled.div`
   height: 64px;
@@ -12,23 +15,30 @@ const Container = styled.div`
   border-radius:12px;
 `;
 
+const Button=styled.button`
+height:40px;
+border:1px solid #4B4376;
+background:none;
+outline:none;
+cursor:pointer;
+color:#4B4376;
+border-radius:20px;
+padding:0 24px;
+`
 const ScoreNTimer = () => {
-  const [timer, setTimer] = useState(Math.floor(Math.random() * 20) + 1);
+  const { score, setScore } = useContext(ScoreContext);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-        //reset timer , if timer is less than 1, otherwise subtract  one 
-      setTimer((prev) => (prev > 1 ? prev - 1 : Math.floor(Math.random() * 20) + 1));
-    }, 1000);
-
-    // Clear the interval when the component unmounts
-    return () => clearInterval(interval);
-  }, []);
-
+  
   return (
     <Container>
-        <p>Score: 200</p>
-       <p>Timer: {timer}s</p>
+        <p>Score: {score}</p>
+        <Button  onClick={() => {
+                setScore(0); // Reset the score
+                navigate("/Trivia-App/cardlist");
+
+               
+              }}>Quit</Button>
     </Container>
   );
 };
